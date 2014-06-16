@@ -1,0 +1,289 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+	<title>Title</title>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="assets/images/favicon.png">
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		BODY {
+			padding:3% 10%;
+			color:#333;
+			font:.875em/1.4 'PT Sans',Arial,sans-serif;
+			}
+		A {color:#06c;}
+		A:hover {color:red !important;}
+		A IMG {border:none 0;}
+		.sublogo {
+			float:right;
+			margin:1.75em 0 0;
+			}
+		H1 {
+			margin:1em 0 2em;
+			font-weight:normal;
+			}
+			H1 IMG {
+				margin:0 0 0 -8px;
+				}
+		.l-cols {
+			overflow:hidden;
+			margin:0 0 0 -2em;
+			padding:0 0 0 2em;
+			zoom:1;
+			}
+			.l-cols H2 {
+				margin:0 0 .25em;
+				font-weight:normal;
+				font-size:1.25em;
+				}
+				.l-cols H2 SMALL {
+					position:relative;
+					top:-.4em;
+					color:#808080;
+					font-size:.65em;
+					}
+				.l-cols H2 SMALL.st-ok {
+					padding:0px 8px;
+					-webkit-border-radius:2px;
+					-moz-border-radius:2px;
+					border-radius:2px;
+					background:#c7e2c1;
+					-o-border-radius:2px;
+					}
+			.l-col-pages {
+				float:left;
+				margin:0 0 2em;
+				}
+				.l-col-pages TH {
+					padding:0 1em 0 0;
+					text-align:left;
+					 font-weight:normal;
+					}
+				.l-col-pages UL {
+					margin:0 0 1.5em -1.6em;
+					padding:0;
+					color:#bbb;
+					list-style:none;
+					font-size:.8em;
+					}
+					.l-col-pages LI {
+						margin:0 0 .25em;
+						}
+						.l-col-pages LI A,
+						.l-col-pages LI SPAN {
+							font-weight:normal;
+							font-size:1.22em;
+							}
+						.l-col-pages LI.new {
+							color:#808080;
+							//font-weight:bold
+							}
+						.l-col-pages LI.newnew {
+							color:#808080;
+							font-weight:bold;
+							}
+						.l-col-pages LI.sub {
+							margin-left:1em;
+							}
+						.l-col-pages LI.section {
+							margin-top:.75em;
+							}
+						.l-col-pages LI H3 {
+							margin:0 0 0 1.6em;
+							color:#404040;
+							font-weight:bold;
+							font-size:1em;
+							}
+			.l-col-vers {
+				float:left;
+				margin:.25em 0 2em;
+				width:20em;
+				}
+				.l-col-vers DL {
+					margin:0;
+					}
+					.l-col-vers DT {
+						margin:0 0 .25em;
+						}
+					.l-col-vers DT.last + DT {
+						margin-top:1em;
+						}
+					.l-col-vers DT.minor {
+						margin:-.25em 0 .5em 1em !important;
+						font-size:.8em;
+						}
+						.l-col-vers DT A {
+							color:#808080;
+							}
+						.l-col-vers DT.last A {
+							/* margin:-.5em; */
+							/* padding:.5em; */
+							/* background:#fff8c1; */
+							color:#06c;
+							}
+							.l-col-vers DT A:hover {
+								}
+						.l-col-vers DT IMG {
+							vertical-align:middle;
+							}
+						.l-col-vers DT SUP {
+							position:relative;
+							top:-.5em;
+							left:.25em;
+							color:#808080;
+							vertical-align:baseline;
+							font-size:.75em;
+							}
+					.l-col-vers DD {
+						margin:0 0 1em 1em;
+						font-size:.8em;
+						}
+						.l-col-vers UL {
+							margin:0;
+							padding:0;
+							color:#666;
+							list-style:none;
+							}
+						.l-col-vers UL A {
+							color:#666;
+							}
+					.l-col-vers .b-folder__tg {
+						color:#999;
+						}
+		P.docs {
+			margin:0 0 2em;
+			}
+			P.docs IMG {
+				vertical-align:middle;
+				}
+
+		.l-col-time {
+			float:left;
+			margin:.25em 0 2em;
+			width:15em;
+			color:#404040;
+			white-space:nowrap;
+			font-size:.85em;
+			}
+			.l-col-time TABLE {
+				margin:0;
+				}
+				.l-col-time TH {
+					padding:0 3em 0 0;
+					text-align:left;
+					font-weight:normal;
+					}
+					.l-col-time TH A {
+						outline:none !important;
+						color:#333;
+						text-decoration:none;
+						}
+						.l-col-time TH A EM {
+							font-style:normal;
+							}
+							.l-col-time TH A:hover EM {
+								border-bottom:1px dashed;
+								}
+						.l-col-time TH A I {
+							position:relative;
+							top:-1px;
+							display:inline-block;
+							width:10px;
+							height:10px;
+							-webkit-border-radius:2px;
+							-moz-border-radius:2px;
+							border-radius:2px;
+							color:#ccc;
+							vertical-align:middle;
+							text-align:center;
+							font-weight:bold;
+							font-size:10px;
+							line-height:1;
+							-o-border-radius:2px;
+							}
+						.l-col-time TH A:hover I {
+							background:#eee;
+							color:#808080;
+							}
+						.l-col-time TH A I.open {
+							display:none;
+							background:#eee;
+							}
+							.l-col-time .tr-section_open TH A I {
+								display:none;
+								}
+							.l-col-time .tr-section_open TH A I.open {
+								display:inline-block;
+								}
+
+
+						.l-col-time .tr-lev1 {
+							display:none;
+							}
+						.l-col-time .tr-lev1 TH {
+							padding-right:.5em;
+							padding-left:2em;
+							font-size:.92em;
+							}
+							.l-col-time .tr-lev1 TH,
+							.l-col-time .tr-lev1 TD {
+								padding-top:0 !important;
+								padding-bottom:0;
+								color:#808080;
+								}
+						.l-col-time TR + .tr-section TH,
+						.l-col-time TR + .tr-section TD {
+							padding-top:.5em;
+							}
+				.l-col-time TD {
+					padding:0 1.5em 0 0;
+					text-align:right;
+					font-weight:normal;
+					}
+				.l-col-time SMALL {
+					color:#bbb;
+					font-size:.92em;
+					}
+				.l-col-time .tr-sum TD {
+					vertical-align:bottom;
+					}
+		.b-folder {margin:0 0 1em;}
+			.b-folder__tg {
+				border-bottom:1px dashed #bbb;
+				cursor:pointer;
+				}
+			.b-folder__i {
+				display:none;
+				}
+			.b-folder_open .b-folder__i {
+				display:block;
+				}
+		.typo-new {
+			position:absolute;
+			margin:-.3em 0 0 .2em;
+			color:#fb0;
+			vertical-align:none;
+			font-size:2.25em;
+			}
+	</style>
+
+</head>
+<body>
+	
+	<h1>Title</h1>
+
+	<div class="l-cols">
+		
+		<div class="l-col-pages">
+			<!-- <h2>Base</h2> -->
+			<ul>
+				<li><i>01.</i> <a href="01-index.html">First Page</a></li>
+				<li><i>02.</i> <span>Second Page</span></li>
+			</ul>
+
+		</div><!--l-col-pages-->
+		
+	</div><!--l-cols-->	
+	
+</body></html>

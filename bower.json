@@ -1,0 +1,13 @@
+{
+  "name": "gulp-prj",
+  "version": "1.0.0",
+  "private": true,
+  "authors": [
+    "dontuncleme <dontuncleme@gmail.com>"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "jquery.browser": "http://jquery.thewikies.com/browser/jquery.browser.min.js"
+  },
+  "overrides": {}
+}

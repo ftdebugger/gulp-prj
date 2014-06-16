@@ -1,0 +1,13 @@
+{
+  "name": "gulp-prj",
+  "version": "1.0.0",
+  "authors": [
+    "dontuncleme <dontuncleme@gmail.com>"
+  ],
+  "dependencies": {
+    "gulp": "~3.6.2",
+    "gulp-concat": "~2.2.0",
+    "gulp-tools": "git+ssh://git@github.com:dontuncleme/gulp-tools.git#master",
+    "gulp-file-include": "~0.2.1"
+  }
+}
