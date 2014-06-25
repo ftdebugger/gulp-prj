@@ -6,8 +6,7 @@
     "dontuncleme <dontuncleme@gmail.com>"
   ],
   "dependencies": {
-    "jquery": "~2.0.3",
-    "jquery.browser": "http://jquery.thewikies.com/browser/jquery.browser.min.js"
+    "jquery": "~2.1.0"
   },
   "overrides": {}
 }
