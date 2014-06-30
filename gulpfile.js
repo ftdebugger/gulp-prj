@@ -1,5 +1,6 @@
 (function () {
 	var gulp = require('gulp'),
+		bower = require('gulp-bower'),
 		browserSync = require('browser-sync'),
 		concat = require('gulp-concat'),
 		compass = require('gulp-compass'),
@@ -26,21 +27,17 @@
 	});
 
 	// bower
-	var vendor = [
-		'vendor/jquery/dist/jquery.js'
-		];
-
-	gulp.task('bower-dev', function () {
-		gulp.src(vendor)
-		   .pipe(concat('vendor.js'))
-		   .pipe(gulp.dest(jsPath));
+	gulp.task('bower-dev', function() {
+		return bower()
+			.pipe(concat('vendor.js'))
+			.pipe(gulp.dest(jsPath));
 	});
 
-	gulp.task('bower', function () {
-		gulp.src(vendor)
-		   .pipe(concat('vendor.js'))
-		   .pipe(uglify())
-		   .pipe(gulp.dest(jsPath));
+	gulp.task('bower', function() {
+		return bower()
+			.pipe(concat('vendor.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest(jsPath));
 	});
 	
 	// js
@@ -92,9 +89,7 @@
 				relative: true,
 				comments: false
 			}))
-			.on('error', function(err) {
-				// Would like to catch the error here
-			})
+			.on('error', function(err) { /* Would like to catch the error here */ })
 			.pipe(prefix('last 2 version'))
 			.pipe(browserSync.reload({stream:true}));
 	};
