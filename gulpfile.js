@@ -1,11 +1,11 @@
 (function () {
 	var gulp = require('gulp'),
-		bower = require('gulp-bower'),
+		bower = require('gulp-bower-files'),
 		browserSync = require('browser-sync'),
 		concat = require('gulp-concat'),
 		compass = require('gulp-compass'),
 		include = require('gulp-file-include'),
-		plumber = require('gulp-plumber')
+		plumber = require('gulp-plumber'),
 		prefix = require('gulp-autoprefixer'),
 		rimraf = require('gulp-rimraf'),
 		uglify = require('gulp-uglify');
@@ -46,7 +46,7 @@
 			.pipe(plumber())
 			.pipe(concat('scripts.js'))
 			.pipe(gulp.dest(jsPath))
-			.pipe(browserSync.reload({stream:true, once: true}));
+			.pipe(browserSync.reload({ stream:true, once: true }));
 	});
 
 	gulp.task('js', function () {
@@ -65,7 +65,7 @@
 			.pipe(plumber())
 			.pipe(include())
 			.pipe(gulp.dest('dist'))
-			.pipe(browserSync.reload({stream:true}));
+			.pipe(browserSync.reload({ stream:true }));
 	};
 
 	gulp.task('html-dev', function () {
@@ -91,7 +91,7 @@
 			}))
 			.on('error', function(err) { /* Would like to catch the error here */ })
 			.pipe(prefix('last 2 version'))
-			.pipe(browserSync.reload({stream:true}));
+			.pipe(browserSync.reload({ stream:true }));
 	};
 
 	gulp.task('sass-dev', function () {
@@ -122,7 +122,7 @@
 			port: 9000,
 			notify: false,
 			server: {
-				baseDir: './dist/',
+				baseDir: './dist/'
 			}
 		});
 	});
