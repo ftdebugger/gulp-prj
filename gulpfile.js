@@ -1,6 +1,6 @@
 (function () {
 	var gulp = require('gulp'),
-		bower = require('gulp-bower-files'),
+		bower = require('main-bower-files'),
 		browserSync = require('browser-sync'),
 		concat = require('gulp-concat'),
 		compass = require('gulp-compass'),
@@ -28,9 +28,9 @@
 
 	// bower
 	gulp.task('bower-dev', function() {
-		return bower()
-			.pipe(concat('vendor.js'))
-			.pipe(gulp.dest(jsPath));
+		return gulp.src(bower())
+				.pipe(concat('vendor.js'))
+				.pipe(gulp.dest(jsPath));			
 	});
 
 	gulp.task('bower', function() {
@@ -95,7 +95,7 @@
 	};
 
 	gulp.task('sass-dev', function () {
-		sass('expanded');           
+		sass('expanded');
 	});
 
 	gulp.task('sass', function () {
