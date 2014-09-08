@@ -4,3 +4,4 @@
 /vendor/
 .sass-cache
 .tmp/
+.DS_Store

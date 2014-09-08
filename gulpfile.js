@@ -1,6 +1,6 @@
 (function () {
 	var gulp = require('gulp'),
-		bower = require('gulp-bower-files'),
+		bower = require('main-bower-files'),
 		browserSync = require('browser-sync'),
 		concat = require('gulp-concat'),
 		compass = require('gulp-compass'),
@@ -10,7 +10,7 @@
 		rimraf = require('gulp-rimraf'),
 		uglify = require('gulp-uglify');
 
-	var staticPath = 'dist/assets';
+	var staticPath = './dist/assets';
 	var jsPath = staticPath + '/js';
 	var cssPath = staticPath + '/css';
 	var fontPath = staticPath + '/fonts';
@@ -18,23 +18,23 @@
 
 	// resources
 	gulp.task('resources', function () {
-		gulp.src('src/images/**/*').pipe(gulp.dest(imagesPath));
-		gulp.src('src/fonts/**/*').pipe(gulp.dest(fontPath));
+		gulp.src('./src/images/**/*').pipe(gulp.dest(imagesPath));
+		gulp.src('./src/fonts/**/*').pipe(gulp.dest(fontPath));
 	});
 
 	gulp.task('images', function () {
-		gulp.src('src/images/**/*').pipe(gulp.dest(imagesPath));
+		gulp.src('./src/images/**/*').pipe(gulp.dest(imagesPath));
 	});
 
 	// bower
 	gulp.task('bower-dev', function() {
-		return bower()
+		return gulp.src(bower())
 			.pipe(concat('vendor.js'))
-			.pipe(gulp.dest(jsPath));
+			.pipe(gulp.dest(jsPath));			
 	});
 
 	gulp.task('bower', function() {
-		return bower()
+		return gulp.src(bower())
 			.pipe(concat('vendor.js'))
 			.pipe(uglify())
 			.pipe(gulp.dest(jsPath));
@@ -42,7 +42,7 @@
 	
 	// js
 	gulp.task('js-dev', function () {
-		gulp.src('src/js/index.js')
+		gulp.src('./src/js/index.js')
 			.pipe(plumber())
 			.pipe(concat('scripts.js'))
 			.pipe(gulp.dest(jsPath))
@@ -50,7 +50,7 @@
 	});
 
 	gulp.task('js', function () {
-		gulp.src('src/js/index.js')
+		gulp.src('./src/js/index.js')
 			.pipe(plumber())
 			.pipe(concat('scripts.js'))
 			.pipe(uglify())
@@ -59,7 +59,7 @@
 
 	// html
 	var html = function (develop) {
-		gulp.src('src/*.html', {
+		gulp.src('./src/*.html', {
 				develop: develop
 			})
 			.pipe(plumber())
@@ -78,11 +78,11 @@
 
 	// sass
 	var sass = function (style) {
-		gulp.src('src/sass/style.scss')
+		gulp.src('./src/sass/style.scss')
 			.pipe(plumber())
 			.pipe(compass({
 				css: cssPath,
-				sass: 'src/sass',
+				sass: './src/sass',
 				image: imagesPath,
 				javascript: jsPath,
 				style: style,
@@ -95,7 +95,7 @@
 	};
 
 	gulp.task('sass-dev', function () {
-		sass('expanded');           
+		sass('expanded');
 	});
 
 	gulp.task('sass', function () {
@@ -110,10 +110,10 @@
 
 	// watch
 	gulp.task('watch', ['build'], function () {
-		gulp.watch('src/js/*', ['js-dev']);
-		gulp.watch(['src/*.html', 'src/tpl/**/*'], ['html-dev']);
-		gulp.watch('src/sass/**/*.scss', ['sass-dev']);
-		gulp.watch('src/images/**/*', ['images']);
+		gulp.watch('./src/js/*', ['js-dev']);
+		gulp.watch(['./src/*.html', './src/tpl/**/*'], ['html-dev']);
+		gulp.watch('./src/sass/**/*.scss', ['sass-dev']);
+		gulp.watch('./src/images/**/*', ['images']);
 	});
 
 	// server
