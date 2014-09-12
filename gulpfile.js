@@ -3,11 +3,14 @@
 		bower = require('main-bower-files'),
 		browserSync = require('browser-sync'),
 		concat = require('gulp-concat'),
-		compass = require('gulp-compass'),
+		sprite = require('gulp.spritesmith'),
+		stylus = require('gulp-stylus'),
 		include = require('gulp-file-include'),
+		minifyCSS = require('gulp-minify-css'),
+		nib = require('nib'),
 		plumber = require('gulp-plumber'),
 		prefix = require('gulp-autoprefixer'),
-		rimraf = require('gulp-rimraf'),
+		clean = require('gulp-rimraf'),
 		uglify = require('gulp-uglify');
 
 	var staticPath = './dist/assets';
@@ -76,44 +79,52 @@
 		html(false);
 	});
 
-	// sass
-	var sass = function (style) {
-		gulp.src('./src/sass/style.scss')
-			.pipe(plumber())
-			.pipe(compass({
-				css: cssPath,
-				sass: './src/sass',
-				image: imagesPath,
-				javascript: jsPath,
-				style: style,
-				relative: true,
-				comments: false
-			}))
-			.on('error', function(err) { /* Would like to catch the error here */ })
-			.pipe(prefix('last 2 version'))
-			.pipe(browserSync.reload({ stream:true }));
-	};
-
-	gulp.task('sass-dev', function () {
-		sass('expanded');
+	// sprite
+	gulp.task('sprite', function () {
+		var spriteData = gulp.src('src/images/spr-ico/*.png').pipe(sprite({
+			imgName: 'spr-ico.png',
+			cssName: '_spr-ico.styl',
+			cssVarMap: function (sprite) {
+				sprite.name = 'spr-' + sprite.name;
+				sprite.image = '../images/' + sprite.image;
+			}
+		}));
+		spriteData.img
+			.pipe(gulp.dest(imagesPath));
+		spriteData.css
+			.pipe(gulp.dest('src/stylus/utils/'));
 	});
 
-	gulp.task('sass', function () {
-		sass('compressed');
+	// stylus
+	gulp.task('stylus-dev', function () {
+		gulp.src('src/stylus/style.styl')
+			.pipe(stylus({ use: [nib()] }))
+			.pipe(plumber())
+			.pipe(prefix('last 2 version'))
+			.pipe(gulp.dest(cssPath))
+			.pipe(browserSync.reload({ stream:true }));
+	});
+
+	gulp.task('stylus', function() {
+		gulp.src('src/stylus/style.styl')
+			.pipe(stylus({ use: [nib()] }))
+			.pipe(prefix('last 2 version'))
+			.pipe(minifyCSS())
+			.pipe(gulp.dest(cssPath));
 	});
 
 	// clean
 	gulp.task('clean', function () {
-		return gulp.src('dist/**/*', { read: false })
-			.pipe(rimraf({ force: true }));
+		return gulp.src('dist/', { read: false })
+			.pipe(clean({ force: true }));
 	});
 
 	// watch
 	gulp.task('watch', ['build'], function () {
-		gulp.watch('./src/js/*', ['js-dev']);
-		gulp.watch(['./src/*.html', './src/tpl/**/*'], ['html-dev']);
-		gulp.watch('./src/sass/**/*.scss', ['sass-dev']);
-		gulp.watch('./src/images/**/*', ['images']);
+		gulp.watch('src/js/*', ['js-dev']);
+		gulp.watch(['src/*.html', 'src/tpl/**/*'], ['html-dev']);
+		gulp.watch('src/stylus/**/*.styl', ['stylus-dev']);
+		gulp.watch('src/images/**/*', ['images', 'sprite']);
 	});
 
 	// server
@@ -122,12 +133,12 @@
 			port: 9000,
 			notify: false,
 			server: {
-				baseDir: './dist/'
+				baseDir: 'dist/'
 			}
 		});
 	});
 
-	gulp.task('release', ['resources', 'bower', 'js', 'html', 'sass']);
-	gulp.task('build', ['resources', 'bower-dev', 'js-dev', 'html-dev', 'sass-dev']);
+	gulp.task('release', ['resources', 'bower', 'js', 'html', 'sprite', 'stylus']);
+	gulp.task('build', ['resources', 'bower-dev', 'js-dev', 'html-dev', 'sprite', 'stylus-dev']);
 	gulp.task('default', ['watch', 'server']);
 })();
