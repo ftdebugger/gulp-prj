@@ -1,15 +1,20 @@
 {
   "name": "gulp-prj",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "authors": [
     "dontuncleme <dontuncleme@gmail.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dontuncleme/gulp-prj"
+  },
   "dependencies": {
     "gulp": "~3.8.0",
     "gulp-autoprefixer": "~1.0.0",
     "gulp-concat": "~2.4.0",
-    "gulp-file-include": "~0.5.0",
+    "gulp-htmlmin": "^0.2.0",
+    "gulp-jade": "^0.8.0",
     "gulp-minify-css": "~0.3.0",
     "gulp-plumber": "~0.6.0",
     "gulp-rimraf": "~0.1.0",
