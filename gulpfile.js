@@ -85,12 +85,15 @@
 
 	// sprite
 	gulp.task('sprite', function () {
-		var spriteData = gulp.src('src/images/spr-ico/*.png').pipe(sprite({
-			imgName: 'spr-ico.png',
-			cssName: '_spr-ico.styl',
+		var spriteData = gulp.src('src/images/png-ico/*.png').pipe(sprite({
+			imgName: 'png-ico.png',
+			cssName: '_png-ico.styl',
+			cssFormat: 'stylus',
+			algorithm: 'binary-tree',
+			cssTemplate: 'src/stylus/tpl/png-ico.mustache',
 			cssVarMap: function (sprite) {
-				sprite.name = 'spr-' + sprite.name;
-				sprite.image = '.images/' + sprite.image;
+				sprite.name = 'png-' + sprite.name;
+				sprite.image = '../images/' + sprite.image;
 			}
 		}));
 		spriteData.img
