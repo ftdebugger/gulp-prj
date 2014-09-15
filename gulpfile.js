@@ -1,5 +1,6 @@
 (function () {
 	var gulp = require('gulp'),
+		base64 = require('gulp-base64'),
 		bower = require('main-bower-files'),
 		browserSync = require('browser-sync'),
 		clean = require('gulp-rimraf'),
@@ -107,6 +108,11 @@
 		gulp.src('src/stylus/style.styl')
 			.pipe(stylus({ use: [nib()] }))
 			.pipe(plumber())
+			.pipe(base64({
+				extensions: ['svg'],
+				maxImageSize: 8*1024,
+				debug: true
+			}))
 			.pipe(prefix('last 2 version'))
 			.pipe(gulp.dest(cssPath))
 			.pipe(browserSync.reload({ stream:true }));
@@ -116,6 +122,11 @@
 		gulp.src('src/stylus/style.styl')
 			.pipe(stylus({ use: [nib()] }))
 			.pipe(plumber())
+			.pipe(base64({
+				extensions: ['svg'],
+				maxImageSize: 8*1024,
+				debug: false
+			}))
 			.pipe(prefix('last 2 version'))
 			.pipe(minifyCSS())
 			.pipe(gulp.dest(cssPath));
