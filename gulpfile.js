@@ -31,31 +31,14 @@
 	});
 
 	// bower
-	gulp.task('bower-dev', function() {
-		return gulp.src(bower())
-			.pipe(concat('vendor.js'))
-			.pipe(gulp.dest(jsPath));			
-	});
-
 	gulp.task('bower', function() {
 		return gulp.src(bower())
 			.pipe(concat('vendor.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest(jsPath));
+			// .pipe(uglify())
+			.pipe(gulp.dest(jsPath));			
 	});
 
 	// jade
-	gulp.task('jade-dev', function() {
-		gulp.src('src/*.jade')
-			.pipe(plumber())
-			.pipe(jade({
-				locals: {},
-				pretty: true
-			}))
-			.pipe(gulp.dest('dist'))
-			.pipe(browserSync.reload({ stream:true }));
-	});
-
 	gulp.task('jade', function() {
 		gulp.src('src/*.jade')
 			.pipe(plumber())
@@ -63,25 +46,19 @@
 				locals: {},
 				pretty: true
 			}))
-			.pipe(htmlmin({collapseWhitespace: true}))
-			.pipe(gulp.dest('dist'));
+			// .pipe(htmlmin({collapseWhitespace: true}))
+			.pipe(gulp.dest('dist'))
+			.pipe(browserSync.reload({ stream:true }));
 	});
 	
 	// js
-	gulp.task('js-dev', function () {
-		gulp.src('src/js/index.js')
-			.pipe(plumber())
-			.pipe(concat('scripts.js'))
-			.pipe(gulp.dest(jsPath))
-			.pipe(browserSync.reload({ stream:true, once: true }));
-	});
-
 	gulp.task('js', function () {
 		gulp.src('src/js/index.js')
 			.pipe(plumber())
 			.pipe(concat('scripts.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest(jsPath));
+			// .pipe(uglify())
+			.pipe(gulp.dest(jsPath))
+			.pipe(browserSync.reload({ stream:true, once: true }));
 	});
 
 	// sprite
@@ -104,7 +81,7 @@
 	});
 
 	// stylus
-	gulp.task('stylus-dev', function () {
+	gulp.task('stylus', function () {
 		gulp.src('src/stylus/style.styl')
 			.pipe(stylus({ use: [nib()] }))
 			.pipe(plumber())
@@ -114,22 +91,9 @@
 				debug: true
 			}))
 			.pipe(prefix('last 2 version'))
+			// .pipe(minifyCSS())
 			.pipe(gulp.dest(cssPath))
 			.pipe(browserSync.reload({ stream:true }));
-	});
-
-	gulp.task('stylus', function() {
-		gulp.src('src/stylus/style.styl')
-			.pipe(stylus({ use: [nib()] }))
-			.pipe(plumber())
-			.pipe(base64({
-				extensions: ['svg'],
-				maxImageSize: 8*1024,
-				debug: false
-			}))
-			.pipe(prefix('last 2 version'))
-			.pipe(minifyCSS())
-			.pipe(gulp.dest(cssPath));
 	});
 
 	// clean
@@ -140,10 +104,10 @@
 
 	// watch
 	gulp.task('watch', ['build'], function () {
-		gulp.watch(['bower.json', 'package.json'], ['bower-dev']);
-		gulp.watch(['src/*.jade', 'src/tpl/**/*'], ['jade-dev']);
-		gulp.watch('src/js/*', ['js-dev']);
-		gulp.watch('src/stylus/**/*.styl', ['stylus-dev']);
+		gulp.watch(['bower.json', 'package.json'], ['bower']);
+		gulp.watch(['src/*.jade', 'src/tpl/**/*'], ['jade']);
+		gulp.watch('src/js/*', ['js']);
+		gulp.watch('src/stylus/**/*.styl', ['stylus']);
 		gulp.watch('src/images/**/*', ['images', 'sprite']);
 	});
 
@@ -157,8 +121,7 @@
 			}
 		});
 	});
-
-	gulp.task('release', ['resources', 'bower', 'js', 'jade', 'sprite', 'stylus']);
-	gulp.task('build', ['resources', 'bower-dev', 'js-dev', 'jade-dev', 'sprite', 'stylus-dev']);
+	
+	gulp.task('build', ['resources', 'bower', 'js', 'jade', 'sprite', 'stylus']);
 	gulp.task('default', ['watch', 'server']);
 })();
