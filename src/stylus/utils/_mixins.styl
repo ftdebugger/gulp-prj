@@ -1,11 +1,15 @@
-fs(fs, lh)
-	font-size fs
-	line-height lh
-
 antialiased()
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
 
+fs(fs, lh)
+	font-size fs
+	line-height lh
+	
+rotate(deg)
+	transform rotate(deg)
+
+/* sprite */
 spriteWidth($sprite)
 	width $sprite[4]
 

@@ -8,12 +8,10 @@
 		jade = require('gulp-jade'),
 		sprite = require('gulp.spritesmith'),
 		stylus = require('gulp-stylus'),
-		minifyCSS = require('gulp-minify-css'),
 		nib = require('nib'),
 		plumber = require('gulp-plumber'),
 		prefix = require('gulp-autoprefixer'),
-		htmlmin = require('gulp-htmlmin'),
-		uglify = require('gulp-uglify');
+		reload = browserSync.reload;
 
 	var staticPath = 'dist/assets';
 	var jsPath = staticPath + '/js';
@@ -22,7 +20,7 @@
 	var imagesPath = staticPath + '/images';
 
 	// resources
-	gulp.task('resources', ['images'], function () {
+	gulp.task('resources', ['images', 'data'], function () {
 		gulp.src('src/fonts/**/*').pipe(gulp.dest(fontPath));
 	});
 
@@ -30,12 +28,15 @@
 		gulp.src('src/images/**/*').pipe(gulp.dest(imagesPath));
 	});
 
+	gulp.task('data', function () {
+		gulp.src('src/*.json').pipe(gulp.dest('dist'));
+	});
+
 	// bower
 	gulp.task('bower', function() {
 		return gulp.src(bower())
 			.pipe(concat('vendor.js'))
-			// .pipe(uglify())
-			.pipe(gulp.dest(jsPath));			
+			.pipe(gulp.dest(jsPath));
 	});
 
 	// jade
@@ -46,9 +47,8 @@
 				locals: {},
 				pretty: true
 			}))
-			// .pipe(htmlmin({collapseWhitespace: true}))
 			.pipe(gulp.dest('dist'))
-			.pipe(browserSync.reload({ stream:true }));
+			.pipe(reload({stream:true}));
 	});
 	
 	// js
@@ -56,7 +56,6 @@
 		gulp.src('src/js/index.js')
 			.pipe(plumber())
 			.pipe(concat('scripts.js'))
-			// .pipe(uglify())
 			.pipe(gulp.dest(jsPath))
 			.pipe(browserSync.reload({ stream:true, once: true }));
 	});
@@ -91,9 +90,8 @@
 				debug: true
 			}))
 			.pipe(prefix('last 2 version'))
-			// .pipe(minifyCSS())
 			.pipe(gulp.dest(cssPath))
-			.pipe(browserSync.reload({ stream:true }));
+			.pipe(reload({stream:true}));
 	});
 
 	// clean
@@ -109,13 +107,15 @@
 		gulp.watch('src/js/*', ['js']);
 		gulp.watch('src/stylus/**/*.styl', ['stylus']);
 		gulp.watch('src/images/**/*', ['images', 'sprite']);
+		gulp.watch('src/*.json', ['data']);
 	});
 
 	// server
 	gulp.task('server', function() {
-		browserSync.init(null, {
+		browserSync({
 			port: 9000,
 			notify: false,
+			open: false,
 			server: {
 				baseDir: 'dist/'
 			}
