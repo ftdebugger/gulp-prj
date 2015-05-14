@@ -1,0 +1,96 @@
+.index-page {
+	font-family: "PT Sans", arial, sans-serif;
+	padding: 4em 8em;
+	overflow-x: hidden;
+	font-size: 1em;
+	color: #403333;
+	line-height: 1.4;
+	height: 100%;
+	background: #fcfcfa;
+	}
+	
+.index {
+	overflow: hidden;
+	padding: 0 2em;
+	
+	&__t {
+		color: #403333;
+		font-size: 3em;
+		font-weight: 400;
+		margin: 0;
+		padding: 0 0 1em;
+		}
+	&__l {
+		list-style: none;
+		padding: 0;
+		margin: 0 8em 0 0;
+		float: left;
+		
+		LI {
+			position: relative;
+			margin-bottom: 0.5em;
+			margin-left: -1.6em;
+			
+			I {
+				display: inline-block;
+				vertical-align: baseline;
+				color: #A6A094;
+				width: 1.5em;
+				font-size: 0.8em;
+				}
+			A,
+			SPAN {
+				margin: 0 .4em;
+				}
+				A {
+					color: #168cd2;
+					text-decoration: none;
+					display: inline-block;
+					vertical-align: baseline;
+					text-shadow: -1px 0 #fcfcfa, 1px 0 #fcfcfa;
+					background: linear-gradient(#168cd2, #168cd2 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+					background-size: 0.4em 0.3em;
+					background-position: 0px 100%;
+					white-space: nowrap;
+					
+					&:hover {
+						box-shadow: 7px 0 0 #f92672, -7px 0 0 #f92672;
+						color: #fff;
+						text-shadow: none;
+						background: #f92672;
+						text-decoration: none;
+						}
+					}
+			}
+		}
+	&__side {
+		overflow: hidden;
+		padding: 0 0 0 2em;
+		}
+		&__desc {
+			padding-bottom: 2em;
+			
+			P {
+				margin: 0;
+				
+				& + & {
+					margin-top: 1em;
+					}
+				}
+			}
+		&__links {
+			list-style: none;
+			margin: 0 0 2em;
+			padding: 0;
+			
+			LI {
+				position: relative;
+				margin-bottom: 0.5em;
+				}
+			}
+	&__c {
+		display: inline-block;
+		vertical-align: baseline;
+		font-size: 0.8em;
+		}
+	}

@@ -1,0 +1,32 @@
+.antialiased() {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	}
+
+.fs(@fs, @lh) {
+	font-size: @fs;
+	line-height: @lh;
+	}
+
+.size(@eq) {
+	width: @eq;
+	height: @eq;
+	}
+	.size(@w, @h) {
+		width: @w;
+		height: @h;
+		}
+	
+.r(@deg) {
+	transform: rotate(@deg);
+	}
+
+/* sprite */
+.sprite(@sprite) {
+	@width: extract(@sprite, 5);
+	@height: extract(@sprite, 6);
+	@bgi: extract(@sprite, 9);
+	
+	.size(@width, @height);
+	background: url(@bgi) no-repeat extract(@sprite, 3) extract(@sprite, 4);
+	}
