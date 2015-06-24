@@ -8,16 +8,16 @@
 	line-height: @lh;
 	}
 
-.size(@eq) {
+.wh(@eq) {
 	width: @eq;
 	height: @eq;
 	}
-	.size(@w, @h) {
+	.wh(@w, @h) {
 		width: @w;
 		height: @h;
 		}
 	
-.r(@deg) {
+.rotate(@deg) {
 	transform: rotate(@deg);
 	}
 
@@ -27,6 +27,6 @@
 	@height: extract(@sprite, 6);
 	@bgi: extract(@sprite, 9);
 	
-	.size(@width, @height);
+	.wh(@width, @height);
 	background: url(@bgi) no-repeat extract(@sprite, 3) extract(@sprite, 4);
 	}

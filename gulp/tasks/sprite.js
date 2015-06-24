@@ -1,21 +1,21 @@
-var config = require('../config'),
+var config = require('../config').sprite,
     gulp = require('gulp'),
     sprite = require('gulp.spritesmith');
 
 gulp.task('sprite', function () {
-	var spriteData = gulp.src(config.sprite.src).pipe(sprite({
-		imgName: config.sprite.name + '.png',
-		cssName: config.sprite.name + config.proc.css.format,
-		cssFormat: config.proc.css.name,
+	var spriteData = gulp.src(config.src).pipe(sprite({
+		imgName: config.name + '.png',
+		cssName: config.name + '.less',
+		cssFormat: '.less',
 		algorithm: 'binary-tree',
-		cssTemplate: 'src/' + config.proc.css.name + '/utils/' + config.sprite.tpl,
+		cssTemplate: 'src/less/utils/' + config.tpl,
 		cssVarMap: function (sprite) {
 			sprite.name = 'png-' + sprite.name;
 			sprite.image = sprite.image;
 		}
 	}));
 	spriteData.img
-		.pipe(gulp.dest(config.sprite.dest));
+		.pipe(gulp.dest(config.dest));
 	spriteData.css
-		.pipe(gulp.dest('src/' + config.proc.css.name + '/utils/'));
+		.pipe(gulp.dest('src/less/utils/'));
 });

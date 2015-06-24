@@ -6,18 +6,6 @@ var staticPath = 'dist/assets',
 
 module.exports = {
 	
-	// preprocessors
-	proc: {
-		html: {
-			name: 'html', // 'html' or 'jade'
-			format: '.html'
-		},
-		css: {
-			name: 'stylus', // 'less' or 'stylus'
-			format: '.styl'
-		}
-	},
-
 	images: {
 		src: 'src/images/**/*',
 		dest: imagesPath
@@ -41,19 +29,8 @@ module.exports = {
 		dest: cssPath
 	},
 
-	stylus: {
-		src: 'src/stylus/style.styl',
-		prefix: 'last 2 version',
-		dest: cssPath
-	},
-
 	html: {
-		src: 'src/html/*.html',
-		dest: 'dist'
-	},
-
-	jade: {
-		src: 'src/jade/*.jade',
+		src: 'src/*.html',
 		dest: 'dist'
 	},
 
