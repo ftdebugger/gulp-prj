@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
-	clean = require('gulp-rimraf');
+	del = require('del');
 
 gulp.task('clean', function () {
-	return gulp.src('dist/', { read: false })
-		.pipe(clean({ force: true }));
+	del(['dist/**']);
 });
