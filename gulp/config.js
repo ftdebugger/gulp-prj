@@ -1,10 +1,12 @@
-var staticPath = 'dist/assets',
+var path = require('path'),
+	staticPath = 'dist/assets',
 	jsPath = staticPath + '/js',
 	cssPath = staticPath + '/css',
 	fontPath = staticPath + '/fonts',
-	imagesPath = staticPath + '/images'
+	imagesPath = staticPath + '/images';
 
 module.exports = {
+	baseUrl: '/assets',
 	
 	images: {
 		src: 'src/images/**/*',
@@ -35,7 +37,7 @@ module.exports = {
 	},
 
 	js: {
-		src: 'src/js/index.js',
+		src: path.join(__dirname, '../src/js/index.js'),
 		target: 'scripts.js',
 		dest: jsPath
 	}

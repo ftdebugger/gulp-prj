@@ -1,23 +1,31 @@
-var config = require('../config').js,
-	gulp = require('gulp'),
-	concat = require('gulp-concat'),
-	plumber = require('gulp-plumber'),
-	browserSync = require('browser-sync'),
-	reload = browserSync.reload,
-	uglify = require('gulp-uglify');
+var configFactory = require('../webpack.config'),
+    browserSync = require('browser-sync'),
+    webpack = require('webpack'),
+    gutil = require('gulp-util'),
+    gulp = require('gulp'),
+    _ = require('lodash');
 
-gulp.task('js', function () {
-	gulp.src(config.src)
-		.pipe(plumber())
-		.pipe(concat(config.target))
-		.pipe(gulp.dest(config.dest))
-		.pipe(browserSync.reload({ stream: true, once: true }));
+require('injectify');
+require('injectify-include/inject');
+
+var runWebpack = function (config, callback) {
+    callback = _.once(callback);
+
+    webpack(config, function (err, stats) {
+        if (err) {
+            gutil.log(gutil.colors.cyan('[webpack]'), gutil.colors.red(err));
+        } else {
+            gutil.log(gutil.colors.cyan('[webpack]'), stats.toString(config.stats));
+        }
+
+        callback();
+    });
+};
+
+gulp.task('js', function (callback) {
+    runWebpack(configFactory(true), callback);
 });
 
-gulp.task('js-release', function () {
-	gulp.src(config.src)
-		.pipe(plumber())
-		.pipe(concat(config.target))
-		.pipe(uglify())
-		.pipe(gulp.dest(config.dest));
+gulp.task('js-release', function (callback) {
+    runWebpack(configFactory(false), callback);
 });
